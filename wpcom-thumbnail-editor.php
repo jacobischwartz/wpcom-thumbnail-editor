@@ -726,7 +726,7 @@ class WPcom_Thumbnail_Editor {
 
 		list( $selection_x1, $selection_y1, $selection_x2, $selection_y2 ) = $coordinates;
 
-		if( function_exists( 'jetpack_photon_url' ) )
+		if( function_exists( 'jetpack_photon_url' ) &&  !defined('JETPACK_DEV_DEBUG') )
 			$url = jetpack_photon_url(
 				wp_get_attachment_url( $attachment_id ),
 				array(
@@ -743,7 +743,7 @@ class WPcom_Thumbnail_Editor {
 				)
 			);
 		else
-			$url = wp_get_attachment_url( $attachment_id );
+			return $existing_resize;
 
 		return array( $url, $thumbnail_size['width'], $thumbnail_size['height'], true );
 	}
